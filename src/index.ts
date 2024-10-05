@@ -46,7 +46,7 @@ const handleClick = () => {
 };
 
 const mutationCallback: MutationCallback = (mutationsList) => {
-	for (const mutation of mutationsList) {
+	for (const _ of mutationsList) {
 		if (!document.querySelector(".show-title-link")) return;
 
 		const button = document.querySelector("#kaddon-button");
