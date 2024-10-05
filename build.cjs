@@ -1,5 +1,5 @@
-const esbuild = require('esbuild');
-const {version} = require('./package.json')
+const esbuild = require("esbuild");
+const { version } = require("./package.json");
 
 const banner = `
 // ==UserScript==
@@ -14,17 +14,19 @@ const banner = `
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=crunchyroll.com
 // @grant        none
 // ==/UserScript==
-`
+`;
 
-esbuild.build({
-  entryPoints: ['src/index.ts'],
-  bundle: true,
-  minifySyntax: true,
-  minifyWhitespace: true,
-  sourcemap: false,
-  target: "esNext",
-  outfile: `dist/markAsViewed-v${version}.user.js`,
-  banner: {
-    js: banner,
-  },
-}).catch(() => process.exit(1));
+esbuild
+	.build({
+		entryPoints: ["src/index.ts"],
+		bundle: true,
+		minifySyntax: true,
+		minifyWhitespace: true,
+		sourcemap: false,
+		target: "esNext",
+		outfile: `dist/markAsViewed-v${version}.user.js`,
+		banner: {
+			js: banner,
+		},
+	})
+	.catch(() => process.exit(1));

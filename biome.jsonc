@@ -8,9 +8,9 @@
 		"rules": {
 			"recommended": true
 		},
-		"ignore": ["index.user.js"]
+		"ignore": ["dist/**"]
 	},
 	"formatter": {
-		"ignore": ["index.user.js"]
+		"ignore": ["dist/**"]
 	}
 }

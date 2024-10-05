@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 import type { ItemParse } from "./types";
-import { mergeObjects } from './utils';
+import { mergeObjects } from "./utils";
 
 const addButton = () => {
 	const titleContainer = document.querySelector(".current-media-parent-ref");
@@ -34,19 +34,18 @@ const handleClick = () => {
 		'script[type="application/ld+json"]',
 	);
 
-  const parsed: ItemParse[] = Array.from(obj)
-    .map(script => {
-        try {
-            return JSON.parse(script.innerText) as ItemParse;
-        } catch (error) {
-            console.error('Erreur lors du parsing JSON:', error);
-            return null;
-        }
-    })
-    .filter((item): item is ItemParse => item !== null);
+	const parsed: ItemParse[] = Array.from(obj)
+		.map((script) => {
+			try {
+				return JSON.parse(script.innerText) as ItemParse;
+			} catch (error) {
+				console.error("Erreur lors du parsing JSON:", error);
+				return null;
+			}
+		})
+		.filter((item): item is ItemParse => item !== null);
 
-	
-  const merged: ItemParse = mergeObjects(parsed);
+	const merged: ItemParse = mergeObjects(parsed);
 
 	const title = merged.partOfSeries?.name;
 	const episode = merged.episodeNumber;
