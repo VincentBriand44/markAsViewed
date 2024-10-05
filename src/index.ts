@@ -59,15 +59,14 @@ const handleClick = () => {
 };
 
 const mutationCallback: MutationCallback = (mutationsList) => {
-	mutationsList.forEach(() => {
+	for (const mutation of mutationsList) {
 		if (!document.querySelector(".show-title-link")) return;
 
 		const button = document.querySelector("#kaddon-button");
-
 		if (button) return;
 
 		addButton();
-	});
+	}
 };
 
 const observer = new MutationObserver(mutationCallback);
