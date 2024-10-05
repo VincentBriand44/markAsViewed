@@ -1,6 +1,6 @@
 {
 	"name": "mark-as-viewed",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"module": "markAsViewed.user.ts",
 	"type": "module",
 	"private": false,
