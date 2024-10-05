@@ -1,7 +1,16 @@
 const esbuild = require('esbuild');
-const fs = require('fs');
+const {version} = require('package.json')
 
-const banner = fs.readFileSync('banner.js', 'utf8');
+const banner = `
+// ==UserScript==
+// @name         Your Script Name
+// @namespace    http://tampermonkey.net/
+// @version      ${version}
+// @description  Your script description
+// @match        https://example.com/*
+// @grant        none
+// ==/UserScript==
+`
 
 esbuild.build({
   entryPoints: ['src/index.ts'],
@@ -10,7 +19,7 @@ esbuild.build({
   minifyWhitespace: true,
   sourcemap: false,
   target: "esNext",
-  outfile: 'dist/markAsViewed.user.js',
+  outfile: `dist/markAsViewed-v${version}.user.js`,
   banner: {
     js: banner,
   },
