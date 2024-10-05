@@ -15,10 +15,11 @@
 	"license": "UNLICENSED",
 	"description": "Mark as viewed on AdKami from Crunchyroll",
 	"devDependencies": {
-		"@types/bun": "^1.1.10"
+		"@types/bun": "^1.1.10",
+		"esbuild": "0.24.0"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "node build.cjs",
 		"lint": "bunx @biomejs/biome lint --write .",
 		"format": "bunx @biomejs/biome format --write .",
 		"check": "bunx @biomejs/biome check --write ."

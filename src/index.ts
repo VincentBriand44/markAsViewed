@@ -11,7 +11,8 @@
 // @grant        none
 // ==/UserScript==
 
-import type { ItemParse } from './types';
+import type { ItemParse } from "./types";
+import { mergeObjects } from './utils';
 
 const addButton = () => {
 	const titleContainer = document.querySelector(".current-media-parent-ref");
@@ -33,29 +34,23 @@ const handleClick = () => {
 		'script[type="application/ld+json"]',
 	);
 
-	if (obj.length < 2) return;
+  const parsed: ItemParse[] = Array.from(obj)
+    .map(script => {
+        try {
+            return JSON.parse(script.innerText) as ItemParse;
+        } catch (error) {
+            console.error('Erreur lors du parsing JSON:', error);
+            return null;
+        }
+    })
+    .filter((item): item is ItemParse => item !== null);
 
-	let parsed: any = null;
+	
+  const merged: ItemParse = mergeObjects(parsed);
 
-	Array.from(obj).some((item: { innerText: string }) => {
-		try {
-			const itemParse: ItemParse = JSON.parse(item.innerText);
-			
-      if (itemParse.partOfSeries) {
-				parsed = itemParse;
-				return true;
-			}
-		} catch (error) {
-			console.error("JSON error:", error);
-		}
-		return false;
-	});
-
-	if (parsed === null) return;
-
-	const title = parsed.partOfSeries.name;
-	const episode = parsed.episodeNumber;
-	const season = parsed.partOfSeason.seasonNumber;
+	const title = merged.partOfSeries?.name;
+	const episode = merged.episodeNumber;
+	const season = merged.partOfSeason?.seasonNumber;
 
 	if (!title || !episode || !season) return;
 
