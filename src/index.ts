@@ -6,17 +6,27 @@ const addButton = () => {
 
 	if (!titleContainer) return;
 
-	const button = document.createElement("a");
+	const buttonA = document.createElement("a");
 
-	button.id = "kaddon-button";
-	button.textContent = "Marquer comme vu";
-	button.style.cursor = "pointer";
-	titleContainer.append(button);
+	buttonA.id = "kaddon-button";
+	buttonA.textContent = "Marquer comme vu";
+	buttonA.style.cursor = "pointer";
+	titleContainer.append(buttonA);
 
-	button.addEventListener("click", () => handleClick());
+	buttonA.addEventListener("click", () => handleClick(0));
+
+	const buttonB = document.createElement("a");
+
+	buttonB.id = "kaddon-button";
+	buttonB.textContent = "(-1)";
+	buttonB.style.cursor = "pointer";
+	buttonB.style.marginLeft = ".25rem";
+	titleContainer.append(buttonB);
+
+	buttonB.addEventListener("click", () => handleClick(-1));
 };
 
-const handleClick = () => {
+const handleClick = (step: number) => {
 	const obj: NodeListOf<HTMLScriptElement> = document.querySelectorAll(
 		'script[type="application/ld+json"]',
 	);
@@ -42,7 +52,7 @@ const handleClick = () => {
 	if (!title || !season) return;
 
 	window.open(
-		`https://www.adkami.com/video?search=${title}${episode ? `&kaddon=${episode}/1/2/${season}` : ""}`,
+		`https://www.adkami.com/video?search=${title}${episode ? `&kaddon=${episode + step}/1/2/${season}` : ""}`,
 	);
 };
 
