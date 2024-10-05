@@ -1,5 +1,5 @@
-const esbuild = require("esbuild");
-const { version } = require("./package.json");
+import { build } from "esbuild";
+import { version } from "./package.json";
 
 const banner = `
 // ==UserScript==
@@ -16,17 +16,15 @@ const banner = `
 // ==/UserScript==
 `;
 
-esbuild
-	.build({
-		entryPoints: ["src/index.ts"],
-		bundle: true,
-		minifySyntax: true,
-		minifyWhitespace: true,
-		sourcemap: false,
-		target: "esNext",
-		outfile: `dist/markAsViewed-v${version}.user.js`,
-		banner: {
-			js: banner,
-		},
-	})
-	.catch(() => process.exit(1));
+build({
+	entryPoints: ["src/index.ts"],
+	bundle: true,
+	minifySyntax: true,
+	minifyWhitespace: true,
+	sourcemap: false,
+	target: "esNext",
+	outfile: `dist/markAsViewed-v${version}.user.js`,
+	banner: {
+		js: banner,
+	},
+}).catch(() => process.exit(1));

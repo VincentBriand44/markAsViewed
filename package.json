@@ -19,7 +19,7 @@
 		"esbuild": "0.24.0"
 	},
 	"scripts": {
-		"build": "node build.cjs",
+		"build": "bun build.ts",
 		"lint": "bunx @biomejs/biome lint --write .",
 		"format": "bunx @biomejs/biome format --write .",
 		"check": "bunx @biomejs/biome check --write ."
