@@ -1,4 +1,5 @@
 import { build } from "esbuild";
+// @ts-ignore bug resolveJsonModule
 import { version } from "./package.json";
 
 const banner = `
