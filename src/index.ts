@@ -37,11 +37,12 @@ const handleClick = () => {
 	const title = merged.partOfSeries?.name;
 	const episode = merged.episodeNumber;
 	const season = merged.partOfSeason?.seasonNumber;
+	console.log("🚀 ~ handleClick ~ merged:", merged);
 
-	if (!title || !episode || !season) return;
+	if (!title || !season) return;
 
 	window.open(
-		`https://www.adkami.com/video?search=${title}&kaddon=${episode}/1/2/${season}`,
+		`https://www.adkami.com/video?search=${title}${episode ? `&kaddon=${episode}/1/2/${season}` : ""}`,
 	);
 };
 
