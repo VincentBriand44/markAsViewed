@@ -30,7 +30,7 @@ build({
 	minifyWhitespace: true,
 	sourcemap: false,
 	target: "esNext",
-	outfile: `dist/markAsViewed.user.js`,
+	outfile: "dist/markAsViewed.user.js",
 	banner: {
 		js: banner,
 	},
