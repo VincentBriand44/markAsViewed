@@ -2,13 +2,13 @@
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
 // @downloadURL  https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @updateURL    https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
-// @match        https://www.crunchyroll.com*
+// @match        https://www.crunchyroll.com/*
 // @match        http*://adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://adkami.com/video?search=*&kaddon=*
