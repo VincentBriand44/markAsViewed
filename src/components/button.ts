@@ -2,9 +2,9 @@ const buttonInject = (
 	position: string,
 	handleClick: (step: number) => void,
 ) => {
-  const element = document.querySelector(position)
+	const element = document.querySelector(position);
 
-  if (!element) throw new Error('button inject failed')
+	if (!element) throw new Error("button inject failed");
 
 	const buttonA = document.createElement("a");
 

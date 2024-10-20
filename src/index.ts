@@ -6,7 +6,7 @@ const { host } = location;
 const website = hostIntegration(host);
 
 const handleClick = (step: number) => {
-  if (!website) return
+	if (!website) return;
 
 	const { episode, season, title } = website.integration();
 
@@ -16,13 +16,13 @@ const handleClick = (step: number) => {
 };
 
 const mutationCallback: MutationCallback = (mutationsList) => {
-  if (!website) return
+	if (!website) return;
 
-  const mutationElement = document.querySelector(website.mutation)
-  
-  for (const _ of mutationsList) {
-    if (!mutationElement) return;
-    
+	const mutationElement = document.querySelector(website.mutation);
+
+	for (const _ of mutationsList) {
+		if (!mutationElement) return;
+
 		const button = document.querySelector("#kaddon-button");
 		if (button || !website?.position) return;
 

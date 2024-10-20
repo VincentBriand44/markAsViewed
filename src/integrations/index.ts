@@ -4,10 +4,12 @@ import crunchyroll from "./crunchyroll";
 interface HostIntegration {
 	integration: () => IntegrationData;
 	position: string;
-  mutation: string;
+	mutation: string;
 }
 
-const hostIntegration = (host: Location["host"]): HostIntegration | undefined => {
+const hostIntegration = (
+	host: Location["host"],
+): HostIntegration | undefined => {
 	switch (host) {
 		case "www.adkami.com": {
 			return undefined;

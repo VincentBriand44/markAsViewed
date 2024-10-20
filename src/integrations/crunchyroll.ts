@@ -35,5 +35,5 @@ const integration = (): IntegrationData => {
 export default {
 	integration,
 	position: ".current-media-parent-ref",
-  mutation: ".show-title-link"
+	mutation: ".show-title-link",
 };
