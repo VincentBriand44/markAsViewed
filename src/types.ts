@@ -44,3 +44,11 @@ export interface ItemParse {
 	duration?: string;
 	uploadDate?: string;
 }
+
+export interface IntegrationData {
+	episode: number;
+	season: number;
+	title: string;
+}
+
+export type Pos = Element | null;

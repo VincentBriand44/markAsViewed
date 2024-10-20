@@ -25,8 +25,8 @@ const banner = `
 build({
 	entryPoints: ["src/index.ts"],
 	bundle: true,
-	minifySyntax: true,
-	minifyWhitespace: true,
+	minifySyntax: false,
+	minifyWhitespace: false,
 	sourcemap: false,
 	target: "esNext",
 	outfile: "dist/markAsViewed.user.js",
