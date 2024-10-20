@@ -1,5 +1,5 @@
+import { mergeObjects } from "../../utils";
 import type { IntegrationData, ItemParse } from "../types";
-import { mergeObjects } from "../utils";
 
 const integration = (): IntegrationData => {
 	const obj: NodeListOf<HTMLScriptElement> = document.querySelectorAll(

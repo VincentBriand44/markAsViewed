@@ -1,6 +1,6 @@
-import buttonInject from "./components/button";
-import goToEpisode from "./components/goToEpisode";
-import hostIntegration from "./integrations";
+import buttonInject from "./lib/button";
+import goToEpisode from "./lib/goToEpisode";
+import hostIntegration from "./lib/integrations";
 
 const { host } = location;
 const website = hostIntegration(host);
