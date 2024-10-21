@@ -1,5 +1,6 @@
-import type { IntegrationData } from "../types";
-import crunchyroll from "./crunchyroll";
+import type { IntegrationData } from '../types';
+import animesama from './animesama';
+import crunchyroll from './crunchyroll';
 
 interface HostIntegration {
 	integration: () => IntegrationData;
@@ -8,13 +9,13 @@ interface HostIntegration {
 }
 
 const hostIntegration = (
-	host: Location["host"],
+	host: Location['host'],
 ): HostIntegration | undefined => {
 	switch (host) {
-		case "www.adkami.com": {
+		case 'www.adkami.com': {
 			return undefined;
 		}
-		case "www.crunchyroll.com": {
+		case 'www.crunchyroll.com': {
 			return crunchyroll;
 		}
 		// case 'animationdigitalnetwork.com': {
@@ -23,12 +24,12 @@ const hostIntegration = (
 		// case 'www.netflix.com': {
 		//   return netflix
 		// }
-		// case 'anime-sama.fr': {
-		//   return animesama
-		// }
+		case 'anime-sama.fr': {
+			return animesama;
+		}
 	}
 
-	throw new Error("invalid website");
+	throw new Error('invalid website');
 };
 
 export default hostIntegration;
