@@ -1,4 +1,5 @@
 import type { IntegrationData } from '../types';
+import adn from './adn';
 import animesama from './animesama';
 import crunchyroll from './crunchyroll';
 
@@ -11,6 +12,7 @@ interface HostIntegration {
 const hostIntegration = (
 	host: Location['host'],
 ): HostIntegration | undefined => {
+	console.log('🚀 ~ host:', host);
 	switch (host) {
 		case 'www.adkami.com': {
 			return undefined;
@@ -18,9 +20,9 @@ const hostIntegration = (
 		case 'www.crunchyroll.com': {
 			return crunchyroll;
 		}
-		// case 'animationdigitalnetwork.com': {
-		//   return adn
-		// }
+		case 'animationdigitalnetwork.com': {
+			return adn;
+		}
 		// case 'www.netflix.com': {
 		//   return netflix
 		// }

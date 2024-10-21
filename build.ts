@@ -13,6 +13,7 @@ const banner = `
 // @downloadURL  https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @updateURL    https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @match        http*://*.crunchyroll.com/*
+// @match        http*://*.animationdigitalnetwork.com/video/*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
 // @match        http*://anime-sama.fr/catalogue/*

@@ -9,6 +9,7 @@
 // @downloadURL  https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @updateURL    https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @match        http*://*.crunchyroll.com/*
+// @match        http*://*.animationdigitalnetwork.com/video/*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
 // @match        http*://anime-sama.fr/catalogue/*
@@ -41,7 +42,7 @@
       }
     </style>
   `;
-    element.append(container);
+    element.after(container);
     const buttonA = document.querySelector("#kaddon-button");
     buttonA?.addEventListener("click", () => handleClick2(0));
     const buttonB = document.querySelector("#kaddon-button-");
@@ -67,31 +68,6 @@
   };
   var goToEpisode_default = goToEpisode;
 
-  // src/lib/integrations/animesama.ts
-  var integration = () => {
-    const episodeElement = document.querySelector("#selectEpisodes");
-    const seasonElement = document.querySelector("#avOeuvre");
-    const title = document.querySelector("#titreOeuvre")?.textContent;
-    console.log("\u{1F680} ~ integration ~ title:", title);
-    const episode = Number.parseInt(episodeElement?.value?.split(" ")[1] ?? "0");
-    console.log("\u{1F680} ~ integration ~ episode:", episode);
-    const season = Number.parseInt(
-      seasonElement?.textContent?.split(" ")[1] ?? ""
-    );
-    console.log("\u{1F680} ~ integration ~ season:", season);
-    if (!title || !season) throw new Error("data not found");
-    return {
-      episode,
-      season,
-      title
-    };
-  };
-  var animesama_default = {
-    integration,
-    position: "#printLastEpisode",
-    mutation: "#titreOeuvre"
-  };
-
   // src/lib/utils.ts
   var mergeObjects = (objects) => {
     const acc = {};
@@ -112,8 +88,8 @@
     return acc;
   };
 
-  // src/lib/integrations/crunchyroll.ts
-  var integration2 = () => {
+  // src/lib/integrations/adn.ts
+  var integration = () => {
     const obj = document.querySelectorAll(
       'script[type="application/ld+json"]'
     );
@@ -127,7 +103,62 @@
     }).filter((item) => item !== null);
     const merged = mergeObjects(parsed);
     const title = merged.partOfSeries?.name;
-    const episode = merged.episodeNumber ?? 0;
+    const episode = Number(merged.episodeNumber) ?? 0;
+    const season = merged.partOfSeason?.seasonNumber;
+    if (!title || !season) throw new Error("data not found");
+    return {
+      episode,
+      season,
+      title
+    };
+  };
+  var adn_default = {
+    integration,
+    position: "h1",
+    mutation: "h1 > span"
+  };
+
+  // src/lib/integrations/animesama.ts
+  var integration2 = () => {
+    const episodeElement = document.querySelector("#selectEpisodes");
+    const seasonElement = document.querySelector("#avOeuvre");
+    const title = document.querySelector("#titreOeuvre")?.textContent;
+    console.log("\u{1F680} ~ integration ~ title:", title);
+    const episode = Number.parseInt(episodeElement?.value?.split(" ")[1] ?? "0");
+    console.log("\u{1F680} ~ integration ~ episode:", episode);
+    const season = Number.parseInt(
+      seasonElement?.textContent?.split(" ")[1] ?? ""
+    );
+    console.log("\u{1F680} ~ integration ~ season:", season);
+    if (!title || !season) throw new Error("data not found");
+    return {
+      episode,
+      season,
+      title
+    };
+  };
+  var animesama_default = {
+    integration: integration2,
+    position: "#printLastEpisode",
+    mutation: "#titreOeuvre"
+  };
+
+  // src/lib/integrations/crunchyroll.ts
+  var integration3 = () => {
+    const obj = document.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
+    const parsed = Array.from(obj).map((script) => {
+      try {
+        return JSON.parse(script.innerText);
+      } catch (error) {
+        console.error("Erreur lors du parsing JSON:", error);
+        return null;
+      }
+    }).filter((item) => item !== null);
+    const merged = mergeObjects(parsed);
+    const title = merged.partOfSeries?.name;
+    const episode = Number(merged.episodeNumber) ?? 0;
     const season = merged.partOfSeason?.seasonNumber;
     if (!title || !season) throw new Error("data not found");
     return {
@@ -137,13 +168,14 @@
     };
   };
   var crunchyroll_default = {
-    integration: integration2,
+    integration: integration3,
     position: ".current-media-parent-ref",
     mutation: ".show-title-link"
   };
 
   // src/lib/integrations/index.ts
   var hostIntegration = (host2) => {
+    console.log("\u{1F680} ~ host:", host2);
     switch (host2) {
       case "www.adkami.com": {
         return void 0;
@@ -151,9 +183,9 @@
       case "www.crunchyroll.com": {
         return crunchyroll_default;
       }
-      // case 'animationdigitalnetwork.com': {
-      //   return adn
-      // }
+      case "animationdigitalnetwork.com": {
+        return adn_default;
+      }
       // case 'www.netflix.com': {
       //   return netflix
       // }

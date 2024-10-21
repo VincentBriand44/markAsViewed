@@ -25,7 +25,7 @@ const buttonInject = (
       }
     </style>
   `;
-	element.append(container);
+	element.after(container);
 
 	const buttonA = document.querySelector('#kaddon-button');
 

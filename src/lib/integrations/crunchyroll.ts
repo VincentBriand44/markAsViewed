@@ -20,7 +20,7 @@ const integration = (): IntegrationData => {
 	const merged: ItemParse = mergeObjects(parsed);
 
 	const title = merged.partOfSeries?.name;
-	const episode = merged.episodeNumber ?? 0;
+	const episode = Number(merged.episodeNumber) ?? 0;
 	const season = merged.partOfSeason?.seasonNumber;
 
 	if (!title || !season) throw new Error('data not found');
