@@ -10,6 +10,7 @@
 // @updateURL    https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @match        http*://*.crunchyroll.com/*
 // @match        http*://*.animationdigitalnetwork.com/video/*
+// @match        http*://*.netflix.com/watch/*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
 // @match        http*://anime-sama.fr/catalogue/*
@@ -36,6 +37,7 @@
         gap: .25rem;
         cursor: pointer;
         padding-left: .5rem;
+        font-size: 16px;
       }
       #kaddon-div a:hover {
         color: blue;
@@ -103,8 +105,8 @@
     }).filter((item) => item !== null);
     const merged = mergeObjects(parsed);
     const title = merged.partOfSeries?.name;
-    const episode = Number(merged.episodeNumber) ?? 0;
-    const season = merged.partOfSeason?.seasonNumber;
+    const episode = Number(merged.episodeNumber ?? 1);
+    const season = merged.partOfSeason?.seasonNumber ?? 1;
     if (!title || !season) throw new Error("data not found");
     return {
       episode,
@@ -123,13 +125,10 @@
     const episodeElement = document.querySelector("#selectEpisodes");
     const seasonElement = document.querySelector("#avOeuvre");
     const title = document.querySelector("#titreOeuvre")?.textContent;
-    console.log("\u{1F680} ~ integration ~ title:", title);
-    const episode = Number.parseInt(episodeElement?.value?.split(" ")[1] ?? "0");
-    console.log("\u{1F680} ~ integration ~ episode:", episode);
+    const episode = Number(episodeElement?.value?.split(" ")[1]);
     const season = Number.parseInt(
       seasonElement?.textContent?.split(" ")[1] ?? ""
     );
-    console.log("\u{1F680} ~ integration ~ season:", season);
     if (!title || !season) throw new Error("data not found");
     return {
       episode,
@@ -173,6 +172,30 @@
     mutation: ".show-title-link"
   };
 
+  // src/lib/integrations/netflix.ts
+  var integration4 = () => {
+    const titleElement = document.querySelector(
+      'div[data-uia="video-title"]'
+    );
+    const episodeElement = Number(
+      titleElement?.querySelectorAll("span")[0]?.textContent?.split("E")[0]
+    );
+    const title = titleElement?.querySelector("h4")?.textContent;
+    const episode = episodeElement ?? 1;
+    const season = Number(titleElement?.querySelector("h4")?.textContent ?? 1);
+    if (!title || !season) throw new Error("data not found");
+    return {
+      episode,
+      season,
+      title
+    };
+  };
+  var netflix_default = {
+    integration: integration4,
+    position: 'div[data-uia="video-title"]',
+    mutation: 'div[data-uia="video-title"]'
+  };
+
   // src/lib/integrations/index.ts
   var hostIntegration = (host2) => {
     console.log("\u{1F680} ~ host:", host2);
@@ -186,9 +209,9 @@
       case "animationdigitalnetwork.com": {
         return adn_default;
       }
-      // case 'www.netflix.com': {
-      //   return netflix
-      // }
+      case "www.netflix.com": {
+        return netflix_default;
+      }
       case "anime-sama.fr": {
         return animesama_default;
       }

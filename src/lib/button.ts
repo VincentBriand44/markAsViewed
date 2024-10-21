@@ -19,6 +19,7 @@ const buttonInject = (
         gap: .25rem;
         cursor: pointer;
         padding-left: .5rem;
+        font-size: 16px;
       }
       #kaddon-div a:hover {
         color: blue;
