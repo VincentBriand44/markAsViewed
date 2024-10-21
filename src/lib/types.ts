@@ -14,7 +14,7 @@ export interface ItemParse {
 		worstRating: number;
 		bestRating: number;
 	};
-	episodeNumber?: number;
+	episodeNumber?: number | string;
 	partOfSeason?: {
 		"@type": string;
 		"@id": string;
@@ -44,3 +44,11 @@ export interface ItemParse {
 	duration?: string;
 	uploadDate?: string;
 }
+
+export interface IntegrationData {
+	episode: number;
+	season: number;
+	title: string;
+}
+
+export type Pos = Element | null;

@@ -12,11 +12,12 @@ const banner = `
 // @source       https://github.com/VincentBriand44/markAsViewed
 // @downloadURL  https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
 // @updateURL    https://raw.githubusercontent.com/VincentBriand44/markAsViewed/refs/heads/main/dist/markAsViewed.user.js
-// @match        https://www.crunchyroll.com/*
-// @match        http*://adkami.com/anime*?kaddon*
+// @match        http*://*.crunchyroll.com/*
+// @match        http*://*.animationdigitalnetwork.com/video/*
+// @match        http*://*.netflix.com/watch/*
 // @match        http*://*.adkami.com/anime*?kaddon*
-// @match        http*://adkami.com/video?search=*&kaddon=*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
+// @match        http*://anime-sama.fr/catalogue/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=crunchyroll.com
 // @grant        none
 // ==/UserScript==
@@ -25,8 +26,8 @@ const banner = `
 build({
 	entryPoints: ["src/index.ts"],
 	bundle: true,
-	minifySyntax: true,
-	minifyWhitespace: true,
+	minifySyntax: false,
+	minifyWhitespace: false,
 	sourcemap: false,
 	target: "esNext",
 	outfile: "dist/markAsViewed.user.js",
