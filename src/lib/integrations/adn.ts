@@ -1,5 +1,5 @@
-import type { IntegrationData, ItemParse } from '../types';
-import { mergeObjects } from '../utils';
+import type { IntegrationData, ItemParse } from "../types";
+import { mergeObjects } from "../utils";
 
 const integration = (): IntegrationData => {
 	const obj: NodeListOf<HTMLScriptElement> = document.querySelectorAll(
@@ -11,7 +11,7 @@ const integration = (): IntegrationData => {
 			try {
 				return JSON.parse(script.innerText) as ItemParse;
 			} catch (error) {
-				console.error('Erreur lors du parsing JSON:', error);
+				console.error("Erreur lors du parsing JSON:", error);
 				return null;
 			}
 		})
@@ -23,7 +23,7 @@ const integration = (): IntegrationData => {
 	const episode = Number(merged.episodeNumber ?? 1);
 	const season = merged.partOfSeason?.seasonNumber ?? 1;
 
-	if (!title || !season) throw new Error('data not found');
+	if (!title || !season) throw new Error("data not found");
 
 	return {
 		episode,
@@ -34,6 +34,6 @@ const integration = (): IntegrationData => {
 
 export default {
 	integration,
-	position: 'h1',
-	mutation: 'h1 > span',
+	position: "h1",
+	mutation: "h1 > span",
 };

@@ -4,9 +4,9 @@ const buttonInject = (
 ) => {
 	const element = document.querySelector(position);
 
-	if (!element) throw new Error('button inject failed');
+	if (!element) throw new Error("button inject failed");
 
-	const container = document.createElement('div');
+	const container = document.createElement("div");
 	container.innerHTML = `
     <div id="kaddon-div">
       <a id="kaddon-button">Marquer comme vu</a>
@@ -28,13 +28,13 @@ const buttonInject = (
   `;
 	element.after(container);
 
-	const buttonA = document.querySelector('#kaddon-button');
+	const buttonA = document.querySelector("#kaddon-button");
 
-	buttonA?.addEventListener('click', () => handleClick(0));
+	buttonA?.addEventListener("click", () => handleClick(0));
 
-	const buttonB = document.querySelector('#kaddon-button-');
+	const buttonB = document.querySelector("#kaddon-button-");
 
-	buttonB?.addEventListener('click', () => handleClick(-1));
+	buttonB?.addEventListener("click", () => handleClick(-1));
 };
 
 export default buttonInject;

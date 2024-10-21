@@ -1,6 +1,6 @@
-import { build } from 'esbuild';
+import { build } from "esbuild";
 // @ts-ignore bug resolveJsonModule
-import { version } from './package.json';
+import { version } from "./package.json";
 
 const banner = `
 // ==UserScript==
@@ -24,13 +24,13 @@ const banner = `
 `;
 
 build({
-	entryPoints: ['src/index.ts'],
+	entryPoints: ["src/index.ts"],
 	bundle: true,
 	minifySyntax: false,
 	minifyWhitespace: false,
 	sourcemap: false,
-	target: 'esNext',
-	outfile: 'dist/markAsViewed.user.js',
+	target: "esNext",
+	outfile: "dist/markAsViewed.user.js",
 	banner: {
 		js: banner,
 	},
