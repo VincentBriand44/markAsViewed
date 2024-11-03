@@ -1,5 +1,16 @@
 import type { Website } from "./types";
 
+let episodeSaved: number | null | undefined = undefined;
+
+const buttonCheck = ({ integration }: Website): boolean => {
+	const { episode } = integration();
+
+	if (episodeSaved === episode) return true;
+
+	episodeSaved = episode;
+	return false;
+};
+
 const buttonInject = ({ position, integration }: Website) => {
 	const { episode, season, title } = integration();
 	const element = document.querySelector(position);
@@ -45,4 +56,4 @@ const buttonInject = ({ position, integration }: Website) => {
 	element.after(container);
 };
 
-export default buttonInject;
+export { buttonCheck, buttonInject };

@@ -1,4 +1,4 @@
-import buttonInject from "./lib/button";
+import { buttonCheck, buttonInject } from "./lib/button";
 import goToEpisode from "./lib/goToEpisode";
 import hostIntegration from "./lib/integrations";
 
@@ -8,15 +8,16 @@ const mutationCallback: MutationCallback = () => {
 	if (!website) return;
 
 	const mutationElement = document.querySelector(website.mutation);
-	const button = document.querySelector("#kaddon-button");
 
-	if (!mutationElement || !website.position || button) return;
+	if (!mutationElement || !website.position || buttonCheck(website)) return;
+
+	document.querySelector("#kaddon-div")?.remove();
 
 	buttonInject(website);
 };
 
 const observer = new MutationObserver(mutationCallback);
-const config = { childList: true, subtree: true };
+const config = { childList: true, subtree: true, attributes: true };
 
 (() => {
 	if (location.host === "www.adkami.com") {
