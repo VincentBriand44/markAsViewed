@@ -35,8 +35,12 @@ const buttonInject = ({ position, integration }: Website) => {
 			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank">(-1)</a>
 		</div>
 	`;
+	element.after(container);
+
+	if (document.getElementById("kaddon-style")) return;
 
 	const style = document.createElement("style");
+	style.id = "kaddon-style";
 	style.textContent = `
 		#kaddon-div {
 			display: flex;
@@ -53,7 +57,6 @@ const buttonInject = ({ position, integration }: Website) => {
 	`;
 
 	document.head.appendChild(style);
-	element.after(container);
 };
 
 export { buttonCheck, buttonInject };
