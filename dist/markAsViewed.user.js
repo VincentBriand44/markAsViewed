@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      1.2.2
+// @version      1.2.3
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
@@ -18,12 +18,12 @@
 // @grant        none
 // ==/UserScript==
 
-"use strict";(()=>{var episodeSaved,buttonCheck=({integration:integration5})=>{let{episode}=integration5();return episodeSaved===episode?!0:(episodeSaved=episode,!1)},buttonInject=({position,integration:integration5})=>{let{episode,season,title}=integration5(),element=document.querySelector(position);if(!element)throw new Error("Button injection failed");let getEpisodeUrl=ep=>{let url=`https://www.adkami.com/video?search=${encodeURIComponent(title)}`;return season!==null&&ep!==null&&ep>0&&(url+=`&kaddon=${ep}/1/2/${season}`),url},episodeUrl=getEpisodeUrl(episode),previousEpisodeUrl=getEpisodeUrl(episode-1),container=document.createElement("div");container.innerHTML=`
+"use strict";(()=>{var episodeSaved,buttonCheck=({integration:integration5})=>{let{episode}=integration5();return episodeSaved===episode?!0:(episodeSaved=episode,!1)},buttonInject=({position,integration:integration5})=>{let{episode,season,title}=integration5(),element=document.querySelector(position);if(!element)throw new Error("Button injection failed");let getEpisodeUrl=ep=>{let url=`https://www.adkami.com/video?search=${encodeURIComponent(title)}`;return season!==null&&ep!==null&&ep>0&&(url+=`&kaddon=${ep}/1/2/${season}`),url},episodeUrl=getEpisodeUrl(episode),previousEpisodeUrl=getEpisodeUrl(episode-1),container=document.createElement("div");if(container.innerHTML=`
 		<div id="kaddon-div">
 			<a id="kaddon-button" href="${episodeUrl}" target="_blank">Marquer comme vu</a>
 			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank">(-1)</a>
 		</div>
-	`,element.after(container);let style=document.createElement("style#kaddon-style");style.textContent=`
+	`,element.after(container),document.getElementById("kaddon-style"))return;let style=document.createElement("style");style.id="kaddon-style",style.textContent=`
 		#kaddon-div {
 			display: flex;
 			gap: .25rem;
