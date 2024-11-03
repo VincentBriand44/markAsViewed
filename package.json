@@ -16,7 +16,7 @@
 	"description": "Mark as viewed on AdKami from other platform",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "^1.1.11",
+		"@types/bun": "^1.1.13",
 		"esbuild": "0.24.0"
 	},
 	"scripts": {
