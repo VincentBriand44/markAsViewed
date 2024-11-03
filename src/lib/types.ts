@@ -52,3 +52,9 @@ export interface IntegrationData {
 }
 
 export type Pos = Element | null;
+
+export interface Website {
+	mutation: string;
+	position: string;
+	integration: () => IntegrationData;
+}

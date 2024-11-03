@@ -1,22 +1,14 @@
 const goToEpisode = () => {
-	const list: NodeListOf<HTMLDivElement> =
-		document.querySelectorAll(".video-item-list");
+	const list = document.querySelectorAll<HTMLDivElement>(".video-item-list");
+	const args = location.search.split("kaddon=")[1];
 
-	if (list.length === 1) {
-		const url: HTMLAnchorElement | null = list[0].querySelector(".top a");
-		const args = location.search.split("kaddon=")[1];
+	if (list.length !== 1) return;
 
-		window.location.href = `${url?.href}/${args}/?kaddon`;
-		return;
+	const anchor = list[0].querySelector<HTMLAnchorElement>(".top a");
+	if (anchor?.href) {
+		window.location.href = `${anchor.href}/${args}/?kaddon`;
 	}
-	// biome-ignore lint/complexity/noForEach: <explanation>
-	list.forEach((item) => {
-		const anchor: HTMLAnchorElement | null = item.querySelector(".top a");
-		const args = location.search.split("kaddon=")[1];
-
-		if (!anchor?.href) return;
-		anchor.href = `${anchor.href}/${args}/?kaddon`;
-	});
+	return;
 };
 
 export default goToEpisode;
