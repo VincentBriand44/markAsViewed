@@ -1,40 +1,59 @@
-const buttonInject = (
-	position: string,
-	handleClick: (step: number) => void,
-) => {
+import type { Website } from "./types";
+
+let episodeSaved: number | null | undefined = undefined;
+
+const buttonCheck = ({ integration }: Website): boolean => {
+	const { episode } = integration();
+
+	if (episodeSaved === episode) return true;
+
+	episodeSaved = episode;
+	return false;
+};
+
+const buttonInject = ({ position, integration }: Website) => {
+	const { episode, season, title } = integration();
 	const element = document.querySelector(position);
 
-	if (!element) throw new Error("button inject failed");
+	if (!element) throw new Error("Button injection failed");
+
+	const getEpisodeUrl = (ep: number | null) => {
+		let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
+		if (season !== null && ep !== null && ep > 0) {
+			url += `&kaddon=${ep}/1/2/${season}`;
+		}
+		return url;
+	};
+
+	const episodeUrl = getEpisodeUrl(episode);
+	const previousEpisodeUrl = getEpisodeUrl(episode - 1);
 
 	const container = document.createElement("div");
 	container.innerHTML = `
-    <div id="kaddon-div">
-      <a id="kaddon-button">Marquer comme vu</a>
-      <a id="kaddon-button-">(-1)</a>
-    </div>
+		<div id="kaddon-div">
+			<a id="kaddon-button" href="${episodeUrl}" target="_blank">Marquer comme vu</a>
+			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank">(-1)</a>
+		</div>
+	`;
 
-    <style>
-      #kaddon-div {
-        display: flex;
-        gap: .25rem;
-        cursor: pointer;
-        padding-left: .5rem;
-        font-size: 16px;
-      }
-      #kaddon-div a:hover {
-        color: blue;
-      }
-    </style>
-  `;
+	const style = document.createElement("style");
+	style.textContent = `
+		#kaddon-div {
+			display: flex;
+			gap: .25rem;
+			padding-left: .5rem;
+			font-size: 16px;
+		}
+		#kaddon-div a {
+			cursor: pointer;
+		}
+		#kaddon-div a:hover {
+			color: blue;
+		}
+	`;
+
+	document.head.appendChild(style);
 	element.after(container);
-
-	const buttonA = document.querySelector("#kaddon-button");
-
-	buttonA?.addEventListener("click", () => handleClick(0));
-
-	const buttonB = document.querySelector("#kaddon-button-");
-
-	buttonB?.addEventListener("click", () => handleClick(-1));
 };
 
-export default buttonInject;
+export { buttonCheck, buttonInject };

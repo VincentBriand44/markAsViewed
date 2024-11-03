@@ -13,7 +13,6 @@ interface HostIntegration {
 const hostIntegration = (
 	host: Location["host"],
 ): HostIntegration | undefined => {
-	console.log("🚀 ~ host:", host);
 	switch (host) {
 		case "www.adkami.com": {
 			return undefined;

@@ -23,5 +23,5 @@ const integration = (): IntegrationData => {
 export default {
 	integration,
 	position: "#printLastEpisode",
-	mutation: "#titreOeuvre",
+	mutation: "#selectEpisodes",
 };
