@@ -27,42 +27,39 @@ const buttonInject = ({ position, integration }: Website) => {
 		return url;
 	};
 
-	const episodeUrl = getEpisodeUrl(episode);
-	const previousEpisodeUrl = getEpisodeUrl(episode - 1);
+	const buttons = [
+		{
+			id: "kaddon-button",
+			icon,
+			step: 0,
+		},
+		{
+			id: "kaddon-button-minus",
+			icon: iconBack,
+			step: -1,
+		},
+	];
 
 	const container = document.createElement("div");
-	container.innerHTML = `
-		<div id="kaddon-div">
-			<a id="kaddon-button" href="${episodeUrl}" target="_blank" style="height: 16px; width: 16px;">
-				${icon}
-			</a>
-			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank" style="height: 16px; width: 16px;">
-				${iconBack}
-			</a>
-		</div>
-	`;
+	container.style.display = "flex";
+	container.style.gap = ".25rem";
+	container.style.paddingLeft = ".5rem";
+
+	for (const button of buttons) {
+		const buttonElement = document.createElement("a");
+		buttonElement.id = button.id;
+		buttonElement.href = getEpisodeUrl(episode + button.step);
+
+		buttonElement.style.cursor = "pointer";
+		buttonElement.style.height = "1rem";
+		buttonElement.style.width = "1rem";
+
+		buttonElement.innerHTML = button.icon;
+
+		container.appendChild(buttonElement);
+	}
+
 	element.after(container);
-
-	if (document.getElementById("kaddon-style")) return;
-
-	const style = document.createElement("style");
-	style.id = "kaddon-style";
-	style.textContent = `
-		#kaddon-div {
-			display: flex;
-			gap: .25rem;
-			padding-left: .5rem;
-			font-size: 16px;
-		}
-		#kaddon-div a {
-			cursor: pointer;
-		}
-		#kaddon-div a:hover {
-			color: blue;
-		}
-	`;
-
-	document.head.appendChild(style);
 };
 
 export { buttonCheck, buttonInject };
