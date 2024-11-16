@@ -1,3 +1,5 @@
+import iconBack from "../assets/markAsView-icon_check-1.svg";
+import icon from "../assets/markAsView-icon_check.svg";
 import type { Website } from "./types";
 
 let episodeSaved: number | null | undefined = undefined;
@@ -31,12 +33,20 @@ const buttonInject = ({ position, integration }: Website) => {
 	const container = document.createElement("div");
 	container.innerHTML = `
 		<div id="kaddon-div">
-			<a id="kaddon-button" href="${episodeUrl}" target="_blank">Marquer comme vu</a>
-			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank">(-1)</a>
+			<a id="kaddon-button" href="${episodeUrl}" target="_blank" style="height: 16px; width: 16px;">
+				${icon}
+			</a>
+			<a id="kaddon-button-minus" href="${previousEpisodeUrl}" target="_blank" style="height: 16px; width: 16px;">
+				${iconBack}
+			</a>
 		</div>
 	`;
+	element.after(container);
+
+	if (document.getElementById("kaddon-style")) return;
 
 	const style = document.createElement("style");
+	style.id = "kaddon-style";
 	style.textContent = `
 		#kaddon-div {
 			display: flex;
@@ -53,7 +63,6 @@ const buttonInject = ({ position, integration }: Website) => {
 	`;
 
 	document.head.appendChild(style);
-	element.after(container);
 };
 
 export { buttonCheck, buttonInject };

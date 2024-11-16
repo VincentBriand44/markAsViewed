@@ -34,4 +34,7 @@ build({
 	banner: {
 		js: banner,
 	},
+	loader: {
+		".svg": "text",
+	},
 }).catch(() => process.exit(1));
