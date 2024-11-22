@@ -49,6 +49,7 @@ const buttonInject = ({ position, integration }: Website) => {
 		const buttonElement = document.createElement("a");
 		buttonElement.id = button.id;
 		buttonElement.href = getEpisodeUrl(episode + button.step);
+		buttonElement.target = "_blank";
 
 		buttonElement.style.cursor = "pointer";
 		buttonElement.style.height = "1rem";
