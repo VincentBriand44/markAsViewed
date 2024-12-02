@@ -57,4 +57,5 @@ export interface Website {
 	mutation: string;
 	position: string;
 	integration: () => IntegrationData;
+	info?: boolean;
 }

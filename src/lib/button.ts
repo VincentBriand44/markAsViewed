@@ -1,6 +1,15 @@
 import iconBack from "../assets/markAsView-icon_check-1.svg";
-import icon from "../assets/markAsView-icon_check.svg";
+import iconCheck from "../assets/markAsView-icon_check.svg";
+import iconInfo from "../assets/markAsView-icon_info.svg";
+
 import type { Website } from "./types";
+
+interface Button {
+	id: string;
+	icon: string;
+	step: number;
+	info?: boolean;
+}
 
 let episodeSaved: number | null | undefined = undefined;
 
@@ -19,18 +28,23 @@ const buttonInject = ({ position, integration }: Website) => {
 
 	if (!element) throw new Error("Button injection failed");
 
-	const getEpisodeUrl = (ep: number | null) => {
+	const getEpisodeUrl = (ep: number | null, info = false) => {
 		let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
 		if (season !== null && ep !== null && ep > 0) {
 			url += `&kaddon=${ep}/1/2/${season}`;
 		}
+
+		if (info) {
+			url += "&kaddon-info";
+		}
+
 		return url;
 	};
 
-	const buttons = [
+	const buttons: Button[] = [
 		{
 			id: "kaddon-button",
-			icon,
+			icon: iconCheck,
 			step: 0,
 		},
 		{
@@ -38,9 +52,16 @@ const buttonInject = ({ position, integration }: Website) => {
 			icon: iconBack,
 			step: -1,
 		},
+		{
+			id: "kaddon-button-info",
+			icon: iconInfo,
+			step: 0,
+			info: true,
+		},
 	];
 
 	const container = document.createElement("div");
+	container.id = "kaddon-container";
 	container.style.display = "flex";
 	container.style.gap = ".25rem";
 	container.style.paddingLeft = ".5rem";
@@ -48,7 +69,7 @@ const buttonInject = ({ position, integration }: Website) => {
 	for (const button of buttons) {
 		const buttonElement = document.createElement("a");
 		buttonElement.id = button.id;
-		buttonElement.href = getEpisodeUrl(episode + button.step);
+		buttonElement.href = getEpisodeUrl(episode + button.step, button.info);
 		buttonElement.target = "_blank";
 
 		buttonElement.style.cursor = "pointer";

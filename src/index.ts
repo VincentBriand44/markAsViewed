@@ -11,7 +11,7 @@ const mutationCallback: MutationCallback = () => {
 
 	if (!mutationElement || !website.position || buttonCheck(website)) return;
 
-	document.querySelector("#kaddon-div")?.remove();
+	document.querySelector("#kaddon-container")?.remove();
 
 	buttonInject(website);
 };
