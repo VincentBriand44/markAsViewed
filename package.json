@@ -16,7 +16,7 @@
 	"description": "Mark as viewed on AdKami from other platform",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "^1.1.13",
+		"@types/bun": "^1.1.14",
 		"esbuild": "0.24.0"
 	},
 	"scripts": {
@@ -26,7 +26,7 @@
 		"check": "bunx @biomejs/biome check --write ."
 	},
 	"peerDependencies": {
-		"typescript": "^5.6.3"
+		"typescript": "^5.7.2"
 	},
 	"config": {
 		"commitizen": {
