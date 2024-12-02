@@ -41,6 +41,7 @@ const buttonInject = ({ position, integration }: Website) => {
 	];
 
 	const container = document.createElement("div");
+	container.id = "kaddon-container";
 	container.style.display = "flex";
 	container.style.gap = ".25rem";
 	container.style.paddingLeft = ".5rem";
