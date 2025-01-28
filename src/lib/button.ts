@@ -30,8 +30,8 @@ const buttonInject = ({ position, integration }: Website) => {
 
 	const getEpisodeUrl = (ep: number | null, info = false) => {
 		let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
-		if (season !== null && ep !== null && ep > 0) {
-			url += `&kaddon=${ep}/1/2/${season}`;
+		if (season !== null && ep !== null) {
+			url += `&kaddon=${ep > 0 ? ep : 1}/1/2/${season}`;
 		}
 
 		if (info) {
