@@ -21,7 +21,7 @@
 		"esbuild": "0.24.2"
 	},
 	"scripts": {
-		"dev": "cross-env NODE_ENV=development bun build.ts",
+		"dev": "cross-env NODE_ENV=development bun --watch build.ts",
 		"build": "bun build.ts",
 		"lint": "bunx @biomejs/biome lint --write .",
 		"format": "bunx @biomejs/biome format --write .",

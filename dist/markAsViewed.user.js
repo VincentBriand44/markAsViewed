@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      0.0.0
+// @version      1.5.1-dev
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
@@ -43,8 +43,8 @@
     if (!element) throw new Error("Button injection failed");
     const getEpisodeUrl = (ep, info = false) => {
       let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
-      if (season !== null && ep !== null && ep > 0) {
-        url += `&kaddon=${ep}/1/2/${season}`;
+      if (season !== null && ep !== null) {
+        url += `&kaddon=${ep > 0 ? ep : 1}/1/2/${season}`;
       }
       if (info) {
         url += "&kaddon-info";
@@ -297,3 +297,4 @@
     observer.observe(document.body, config);
   })();
 })();
+//# sourceMappingURL=markAsViewed.user.js.map
