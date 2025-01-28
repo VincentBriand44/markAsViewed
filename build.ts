@@ -1,12 +1,11 @@
-import { build } from "esbuild";
-// @ts-ignore bug resolveJsonModule
+import { type BuildOptions, type SameShape, build, context } from "esbuild";
 import { version } from "./package.json";
 
 const banner = `
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      ${version}
+// @version      ${process.env.NODE_ENV === "development" ? `${version}-dev` : version}
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
@@ -23,12 +22,12 @@ const banner = `
 // ==/UserScript==
 `;
 
-build({
+const buildOptions: SameShape<BuildOptions, BuildOptions> = {
 	entryPoints: ["src/index.ts"],
 	bundle: true,
-	minifySyntax: true,
-	minifyWhitespace: true,
-	sourcemap: false,
+	minifySyntax: process.env.NODE_ENV !== "development",
+	minifyWhitespace: process.env.NODE_ENV !== "development",
+	sourcemap: process.env.NODE_ENV === "development",
 	target: "esNext",
 	outfile: "dist/markAsViewed.user.js",
 	banner: {
@@ -37,4 +36,11 @@ build({
 	loader: {
 		".svg": "text",
 	},
-}).catch(() => process.exit(1));
+};
+
+if (process.env.NODE_ENV === "development") {
+	const ctx = await context(buildOptions);
+	await ctx.watch();
+} else {
+	build(buildOptions).catch(() => process.exit(1));
+}
