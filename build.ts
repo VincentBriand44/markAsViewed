@@ -1,5 +1,4 @@
-import { build } from "esbuild";
-// @ts-ignore bug resolveJsonModule
+import { type BuildOptions, type SameShape, build, context } from "esbuild";
 import { version } from "./package.json";
 
 const banner = `
@@ -23,7 +22,7 @@ const banner = `
 // ==/UserScript==
 `;
 
-build({
+const buildOptions: SameShape<BuildOptions, BuildOptions> = {
 	entryPoints: ["src/index.ts"],
 	bundle: true,
 	minifySyntax: process.env.NODE_ENV !== "development",
@@ -37,4 +36,11 @@ build({
 	loader: {
 		".svg": "text",
 	},
-}).catch(() => process.exit(1));
+};
+
+if (process.env.NODE_ENV === "development") {
+	const ctx = await context(buildOptions);
+	await ctx.watch();
+} else {
+	build(buildOptions).catch(() => process.exit(1));
+}
