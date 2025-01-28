@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      1.5.1-dev
+// @version      1.5.2-dev
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
