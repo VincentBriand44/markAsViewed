@@ -6,7 +6,7 @@ const banner = `
 // ==UserScript==
 // @name         Mark as viewed
 // @namespace    http://tampermonkey.net/
-// @version      ${version}
+// @version      ${process.env.NODE_ENV === "development" ? "0.0.0" : version}
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
@@ -26,8 +26,8 @@ const banner = `
 build({
 	entryPoints: ["src/index.ts"],
 	bundle: true,
-	minifySyntax: true,
-	minifyWhitespace: true,
+	minifySyntax: process.env.NODE_ENV !== "development",
+	minifyWhitespace: process.env.NODE_ENV !== "development",
 	sourcemap: false,
 	target: "esNext",
 	outfile: "dist/markAsViewed.user.js",
