@@ -172,5 +172,5 @@ web_modules/
 # Finder (MacOS) folder config
 .DS_Store
 
-# Map files
-*.js.map
+# builds folder
+dist/
