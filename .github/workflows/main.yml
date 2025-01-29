@@ -41,6 +41,14 @@ jobs:
       - name: Build script
         run: bun run build
         
+      - name: Commit build
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dist/markAsViewed.user.js
+          git commit -m "🔖 deploy v${{ steps.get_version.outputs.version }} [skip ci]" || echo "No changes to commit"
+          git push
+        
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
