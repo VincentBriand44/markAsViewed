@@ -20,6 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          persist-credentials: false
       
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -42,12 +43,14 @@ jobs:
         run: bun run build
         
       - name: Commit build
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -f dist/markAsViewed.user.js
           git commit -m "🔖 deploy v${{ steps.get_version.outputs.version }} [skip ci]" || echo "No changes to commit"
-          git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git push
         
       - name: Create Release
