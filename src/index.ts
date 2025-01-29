@@ -29,7 +29,18 @@ const config = { childList: true, subtree: true, attributes: true };
 		const watchlist = document.querySelector<HTMLButtonElement>(
 			"#watchlist-actuel, #watchlist_end",
 		);
+
 		if (watchlist) {
+			const title = document.querySelector<HTMLHeadingElement>(
+				"h1.title-header-video",
+			);
+
+			const { pathname } = window.location;
+
+			const episode = pathname.split("/")[3];
+
+			if (!title || !title.textContent?.includes(episode)) return;
+
 			watchlist.click();
 			setTimeout(() => window.close(), 1000);
 		}
