@@ -16,9 +16,9 @@
 	"description": "Mark as viewed on AdKami from other platform",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "^1.2.1",
+		"@types/bun": "^1.2.2",
 		"cross-env": "7.0.3",
-		"esbuild": "0.24.2"
+		"esbuild": "0.25.0"
 	},
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development bun --watch build.ts",
