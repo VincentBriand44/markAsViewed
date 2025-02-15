@@ -7,11 +7,18 @@ const website = hostIntegration(location.host);
 const mutationCallback: MutationCallback = () => {
 	if (!website) return;
 
+	const container = document.querySelector("#kaddon-container");
+
 	const mutationElement = document.querySelector(website.mutation);
 
-	if (!mutationElement || !website.position || buttonCheck(website)) return;
+	if (
+		!mutationElement ||
+		!website.position ||
+		(buttonCheck(website) && container)
+	)
+		return;
 
-	document.querySelector("#kaddon-container")?.remove();
+	container?.remove();
 
 	buttonInject(website);
 };
