@@ -30,6 +30,7 @@ const config = { childList: true, subtree: true, attributes: true };
 	if (location.host === "www.adkami.com") {
 		if (location.pathname === "/video") {
 			goToEpisode();
+
 			return;
 		}
 

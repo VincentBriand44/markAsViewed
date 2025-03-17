@@ -20,7 +20,7 @@ const goToEpisode = () => {
 		searchButton.addEventListener("click", (e) => {
 			e.preventDefault();
 
-			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}`;
+			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}?kaddon-info`;
 		});
 	}
 
