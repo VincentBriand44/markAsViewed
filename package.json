@@ -1,6 +1,6 @@
 {
 	"name": "mark-as-viewed",
-	"version": "1.5.4",
+	"version": "1.6.0",
 	"module": "index.ts",
 	"type": "module",
 	"private": false,
@@ -16,9 +16,9 @@
 	"description": "Mark as viewed on AdKami from other platform",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/bun": "^1.2.2",
+		"@types/bun": "^1.2.5",
 		"cross-env": "7.0.3",
-		"esbuild": "0.25.0"
+		"esbuild": "0.25.1"
 	},
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development bun --watch build.ts",
@@ -28,7 +28,7 @@
 		"check": "bunx @biomejs/biome check --write ."
 	},
 	"peerDependencies": {
-		"typescript": "^5.7.3"
+		"typescript": "^5.8.2"
 	},
 	"config": {
 		"commitizen": {
