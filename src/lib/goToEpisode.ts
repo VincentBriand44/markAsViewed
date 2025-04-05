@@ -20,16 +20,16 @@ const goToEpisode = () => {
 		searchButton.addEventListener("click", (e) => {
 			e.preventDefault();
 
-			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}?kaddon-info`;
+			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}&kaddon-info`;
 		});
 	}
 
-	if (list.length > 1 && !info) {
+	if (list.length > 1) {
 		for (const item of Array.from(list)) {
 			const anchor = item.querySelector<HTMLAnchorElement>(".top a");
 
 			if (anchor?.href) {
-				anchor.href = `${anchor.href}/${args}/?kaddon`;
+				anchor.href = `${anchor.href}/${args}/?${info ? "kaddon-info" : "kaddon"}`;
 			}
 		}
 
