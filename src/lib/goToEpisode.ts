@@ -8,7 +8,7 @@ const goToEpisode = () => {
 		args = args.replace("&kaddon-info", "");
 	}
 
-	if (list.length === 0 && !info) {
+	if (!info) {
 		const searchInput =
 			document.querySelector<HTMLInputElement>(".search-input");
 		const searchButton = document.querySelector<HTMLButtonElement>(
