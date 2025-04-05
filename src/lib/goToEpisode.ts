@@ -2,13 +2,19 @@ const goToEpisode = () => {
 	const list = document.querySelectorAll<HTMLDivElement>(".video-item-list");
 	let args = location.search.split("kaddon=")[1];
 	let info = false;
+	let lock = false;
 
 	if (args.includes("&kaddon-info")) {
 		info = true;
 		args = args.replace("&kaddon-info", "");
 	}
 
-	if (list.length === 0 && !info) {
+	if (args.includes("&kaddon-lock")) {
+		lock = true;
+		args = args.replace("&kaddon-lock", "");
+	}
+
+	if (!info) {
 		const searchInput =
 			document.querySelector<HTMLInputElement>(".search-input");
 		const searchButton = document.querySelector<HTMLButtonElement>(
@@ -20,29 +26,25 @@ const goToEpisode = () => {
 		searchButton.addEventListener("click", (e) => {
 			e.preventDefault();
 
-			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}?kaddon-info`;
+			window.location.href = `https://www.adkami.com/video?search=${searchInput.value}&kaddon=${args}&kaddon-lock`;
 		});
 	}
 
-	if (list.length > 1 && !info) {
-		for (const item of Array.from(list)) {
-			const anchor = item.querySelector<HTMLAnchorElement>(".top a");
+	if (list.length < 1) return;
 
-			if (anchor?.href) {
-				anchor.href = `${anchor.href}/${args}/?kaddon`;
-			}
+	for (const item of Array.from(list)) {
+		const anchor = item.querySelector<HTMLAnchorElement>(".top a");
+
+		if (anchor?.href) {
+			anchor.href = `${anchor.href}/${args}/?${info ? "kaddon-info" : "kaddon"}`;
 		}
-
-		return;
 	}
 
 	const anchor = list[0].querySelector<HTMLAnchorElement>(".top a");
 
-	if (anchor?.href) {
-		window.location.href = `${anchor.href}/${args}/${info ? "" : "?kaddon"}`;
-	}
+	if (!anchor?.href || lock) return;
 
-	return;
+	window.location.href = `${anchor.href}/${args}/${info ? "" : "?kaddon"}`;
 };
 
 export default goToEpisode;
