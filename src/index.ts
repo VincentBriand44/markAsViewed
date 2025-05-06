@@ -34,6 +34,8 @@ const config = { childList: true, subtree: true, attributes: true };
 			return;
 		}
 
+		if (location.search.includes("kaddon-info")) return;
+
 		const watchlist = document.querySelector<HTMLButtonElement>(
 			"#watchlist-actuel, #watchlist_end",
 		);
