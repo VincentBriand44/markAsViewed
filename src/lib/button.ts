@@ -1,5 +1,5 @@
-import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconCheck from "../assets/markAsView-icon_check.svg";
+import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconInfo from "../assets/markAsView-icon_info.svg";
 
 import type { Website } from "./types";
@@ -11,7 +11,7 @@ interface Button {
 	info?: boolean;
 }
 
-let episodeSaved: number | null | undefined = undefined;
+let episodeSaved: number | null | undefined;
 
 const buttonCheck = ({ integration }: Website): boolean => {
 	const { episode } = integration();

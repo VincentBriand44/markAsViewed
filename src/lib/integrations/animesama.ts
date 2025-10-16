@@ -9,6 +9,7 @@ const integration = (): IntegrationData => {
 	const episode = Number(episodeElement?.value?.split(" ")[1]);
 	const season = Number.parseInt(
 		seasonElement?.textContent?.split(" ")[1] ?? "",
+		10,
 	);
 
 	if (!title || !season) throw new Error("data not found");
