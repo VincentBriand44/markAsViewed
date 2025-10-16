@@ -9,8 +9,8 @@ const banner = `
 // @description  Mark as viewed on AdKami from Crunchyroll
 // @author       Kanon
 // @source       https://github.com/VincentBriand44/markAsViewed
-// @downloadURL  https://github.com/VincentBriand44/markAsViewed/raw/refs/heads/main/dist/markAsViewed.user.js
-// @updateURL    https://github.com/VincentBriand44/markAsViewed/raw/refs/heads/main/dist/markAsViewed.user.js
+// @downloadURL  https://github.com/VincentBriand44/markAsViewed/releases/latest/download/markAsViewed.user.js
+// @updateURL    https://github.com/VincentBriand44/markAsViewed/releases/latest/download/markAsViewed.user.js
 // @match        http*://*.crunchyroll.com/*
 // @match        http*://*.animationdigitalnetwork.com/video/*
 // @match        http*://*.netflix.com/watch/*

@@ -1,5 +1,5 @@
-import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconCheck from "../assets/markAsView-icon_check.svg";
+import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconInfo from "../assets/markAsView-icon_info.svg";
 
 import type { IntegrationData, Website } from "./types";
