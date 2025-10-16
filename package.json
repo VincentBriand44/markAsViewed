@@ -15,10 +15,10 @@
 	"license": "UNLICENSED",
 	"description": "Mark as viewed on AdKami from other platform",
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@types/bun": "^1.2.5",
-		"cross-env": "7.0.3",
-		"esbuild": "0.25.1"
+		"@biomejs/biome": "2.2.6",
+		"@types/bun": "^1.3.0",
+		"cross-env": "10.1.0",
+		"esbuild": "0.25.11"
 	},
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development bun --watch build.ts",
@@ -28,15 +28,23 @@
 		"check": "bunx @biomejs/biome check --write ."
 	},
 	"peerDependencies": {
-		"typescript": "^5.8.2"
+		"typescript": "^5.9.3"
 	},
 	"config": {
 		"commitizen": {
 			"path": "cz-emoji"
 		},
 		"cz-emoji": {
-			"skipQuestions": ["scope", "body", "issues", "breaking"]
+			"skipQuestions": [
+				"scope",
+				"body",
+				"issues",
+				"breaking"
+			]
 		}
 	},
-	"trustedDependencies": ["@biomejs/biome", "esbuild"]
+	"trustedDependencies": [
+		"@biomejs/biome",
+		"esbuild"
+	]
 }
