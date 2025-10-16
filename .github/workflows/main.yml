@@ -11,36 +11,50 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-release:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
-        
+        with:
+          bun-version: latest
+
       - name: Install dependencies
         run: bun install
-        
+
+      - name: Lint and format code
+        run: bun run check
+
       - name: Get version
         id: get_version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-        
+
       - name: Get previous version
         id: get_previous_version
         run: |
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           PREVIOUS_VERSION=${PREVIOUS_TAG#v}
           echo "previous_version=$PREVIOUS_VERSION" >> $GITHUB_OUTPUT
-        
+
       - name: Build script
         run: bun run build
-        
+
+      - name: Verify build output
+        run: |
+          if [ ! -f "dist/markAsViewed.user.js" ]; then
+            echo "❌ Build failed: dist/markAsViewed.user.js not found"
+            exit 1
+          fi
+          echo "✅ Build successful: $(wc -c < dist/markAsViewed.user.js) bytes"
+
       - name: Commit build
         run: |
           git config --local user.email "action@github.com"
@@ -48,20 +62,32 @@ jobs:
           git add -f dist/markAsViewed.user.js
           git commit -m ":bookmark: deploy version ${{ steps.get_version.outputs.version }}"
           git push origin main
-        
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/markAsViewed.user.js
           tag_name: v${{ steps.get_version.outputs.version }}
+          name: "Mark as Viewed v${{ steps.get_version.outputs.version }}"
           body: |
-            ## Installation
-            **Étape 1:**
-            - Installer Tampermonkey
+            ### Installation
+            1. **Installer Tampermonkey** (si pas déjà fait)
+            2. **Télécharger le script** ci-dessous
+            3. **Cliquer sur "Installer"** (Tampermonkey détecte automatiquement le script)
 
-            **Étape 2:**
-            - Télécharger le script
-            - Cliquer sur *installer* _(Tampermonkey détecte automatiquement le téléchargement d'un script)_
+            ### Améliorations de cette version
+            - Gestion d'erreurs robuste
+            - Optimisation des performances (debouncing + cache)
+            - Sécurité des types TypeScript améliorée
+            - Documentation complète
+            - Code refactorisé et optimisé
+
+            ### Sites supportés
+            - Crunchyroll
+            - Netflix
+            - ADN (Animation Digital Network)
+            - Anime-Sama
+            - AdKami
 
             **Full Changelog**: https://github.com/${{ github.repository }}/compare/v${{ steps.get_previous_version.outputs.previous_version }}...v${{ steps.get_version.outputs.version }}
         env:
