@@ -1,18 +1,10 @@
-import type { IntegrationData } from "../types";
+import type { Website } from "../types";
 import adn from "./adn";
 import animesama from "./animesama";
 import crunchyroll from "./crunchyroll";
 import netflix from "./netflix";
 
-interface HostIntegration {
-	integration: () => IntegrationData;
-	position: string;
-	mutation: string;
-}
-
-const hostIntegration = (
-	host: Location["host"],
-): HostIntegration | undefined => {
+const hostIntegration = (host: Location["host"]): Website | undefined => {
 	switch (host) {
 		case "www.adkami.com": {
 			return undefined;
@@ -29,9 +21,11 @@ const hostIntegration = (
 		case "anime-sama.fr": {
 			return animesama;
 		}
+		default: {
+			console.warn(`Site non supporté: ${host}`);
+			return undefined;
+		}
 	}
-
-	throw new Error("invalid website");
 };
 
 export default hostIntegration;

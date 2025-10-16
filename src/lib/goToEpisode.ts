@@ -15,11 +15,8 @@ const goToEpisode = (): void => {
 	}
 
 	if (!info) {
-		const searchInput =
-			document.querySelector<HTMLInputElement>(".search-input");
-		const searchButton = document.querySelector<HTMLButtonElement>(
-			".video-search-button",
-		);
+		const searchInput = document.querySelector<HTMLInputElement>(".search-input");
+		const searchButton = document.querySelector<HTMLButtonElement>(".video-search-button");
 
 		if (!searchInput || !searchButton) return;
 

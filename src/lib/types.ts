@@ -51,11 +51,10 @@ export interface IntegrationData {
 	title: string;
 }
 
-export type Pos = Element | null;
-
 export interface Website {
-	mutation: string;
-	position: string;
 	integration: () => IntegrationData;
-	info?: boolean;
+	position: string;
+	mutation: string;
 }
+
+export type Pos = Element | null;
