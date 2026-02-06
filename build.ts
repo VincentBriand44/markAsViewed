@@ -16,7 +16,7 @@ const banner = `
 // @match        http*://*.netflix.com/watch/*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
-// @match        http*://anime-sama.fr/catalogue/*
+// @include      http*://anime-sama.*/catalogue/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=crunchyroll.com
 // @grant        none
 // ==/UserScript==

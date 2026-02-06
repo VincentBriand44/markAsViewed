@@ -5,20 +5,20 @@ import crunchyroll from "./crunchyroll";
 import netflix from "./netflix";
 
 const hostIntegration = (host: Location["host"]): Website | undefined => {
-	switch (host) {
-		case "www.adkami.com": {
+	switch (true) {
+		case host === "www.adkami.com": {
 			return undefined;
 		}
-		case "www.crunchyroll.com": {
+		case host === "www.crunchyroll.com": {
 			return crunchyroll;
 		}
-		case "animationdigitalnetwork.com": {
+		case host === "animationdigitalnetwork.com": {
 			return adn;
 		}
-		case "www.netflix.com": {
+		case host === "www.netflix.com": {
 			return netflix;
 		}
-		case "anime-sama.fr": {
+		case host.startsWith("anime-sama."): {
 			return animesama;
 		}
 		default: {
