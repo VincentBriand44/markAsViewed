@@ -8,8 +8,8 @@ const data = (): Data => {
 	const episode = Number(episodeElement?.value?.split(" ")[1]);
 	const season = Number.parseInt(seasonElement?.textContent?.split(" ")[1] ?? "", 10);
 
-  console.log(title, season)
-  
+	console.log(title, season);
+
 	if (!title) throw new Error("data not found");
 
 	return {
@@ -24,6 +24,6 @@ export default {
 	episodePosition: "#printLastEpisode",
 	episodeMutation: "#selectEpisodes",
 
-  animePosition: '#addVu',
-  animeMutation: '#addVu'
+	animePosition: "#addVu",
+	animeMutation: "#addVu",
 };

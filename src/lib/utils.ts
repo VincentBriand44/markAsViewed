@@ -45,9 +45,9 @@ export const parseJsonLdData = (): ItemParse[] => {
 };
 
 export const extractIntegrationData = (parsed: ItemParse[], bypass?: string | undefined): Data => {
-  if (bypass) return { title: bypass, episode: 0, season: 0 }
+	if (bypass) return { title: bypass, episode: 0, season: 0 };
 
-  console.log(bypass)
+	console.log(bypass);
 
 	const merged: ItemParse = mergeObjects(parsed);
 

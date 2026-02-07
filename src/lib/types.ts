@@ -53,7 +53,7 @@ export interface Data {
 
 export interface Website {
 	data: () => Data;
-  
+
 	episodePosition: string;
 	episodeMutation: string;
 

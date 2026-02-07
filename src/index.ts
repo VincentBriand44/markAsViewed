@@ -16,22 +16,22 @@ const mutationCallback: MutationCallback = () => {
 
 	mutationTimeout = setTimeout(() => {
 		const container = document.querySelector("#kaddon-container");
-    let seasonState = false
+		let seasonState = false;
 
-    if (!website.episodeMutation) return
+		if (!website.episodeMutation) return;
 
 		let mutationElement = document.querySelector(website.episodeMutation);
 
-    if (!mutationElement && website.animeMutation) {
-      mutationElement = document.querySelector(website.animeMutation);
-      seasonState = true
-    }
+		if (!mutationElement && website.animeMutation) {
+			mutationElement = document.querySelector(website.animeMutation);
+			seasonState = true;
+		}
 
-		if (!mutationElement || (buttonCheck({data: website.data, seasonState}) && container)) return;
+		if (!mutationElement || (buttonCheck({ data: website.data, seasonState }) && container)) return;
 
 		container?.remove();
 
-    seasonState ? animeInject(website) : episodeInject(website);
+		seasonState ? animeInject(website) : episodeInject(website);
 	}, MUTATION_DEBOUNCE_DELAY);
 };
 
