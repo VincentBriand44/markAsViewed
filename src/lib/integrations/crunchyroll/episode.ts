@@ -22,5 +22,5 @@ export default {
 	episodeMutation: ".show-title-link",
 
 	animePosition: ".bottom-actions-wrapper",
-	animeMutation: ".bottom-actions-wrapper",
+	animeMutation: ".seasons-select",
 };
