@@ -1,10 +1,10 @@
 import type { Website } from "../types";
-import adn from "./adn";
-import animesama from "./animesama";
-import crunchyroll from "./crunchyroll";
-import netflix from "./netflix";
+import adn from "./adn/episode";
+import animesama from "./animesama/episode";
+import crunchyroll from "./crunchyroll/episode";
+import netflix from "./netflix/episode";
 
-const hostIntegration = (host: Location["host"]): Website | undefined => {
+const episodeIntegration = (host: Location["host"]): Website | undefined => {
 	switch (true) {
 		case host === "www.adkami.com": {
 			return undefined;
@@ -28,4 +28,4 @@ const hostIntegration = (host: Location["host"]): Website | undefined => {
 	}
 };
 
-export default hostIntegration;
+export default episodeIntegration;

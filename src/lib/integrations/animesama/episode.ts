@@ -1,6 +1,6 @@
-import type { IntegrationData } from "../types";
+import type { Data } from "../../types";
 
-const integration = (): IntegrationData => {
+const data = (): Data => {
 	const episodeElement: HTMLSelectElement | null = document.querySelector("#selectEpisodes");
 	const seasonElement = document.querySelector("#avOeuvre");
 
@@ -18,7 +18,7 @@ const integration = (): IntegrationData => {
 };
 
 export default {
-	integration,
-	position: "#printLastEpisode",
-	mutation: "#selectEpisodes",
+	data,
+	episodePosition: "#printLastEpisode",
+	episodeMutation: "#selectEpisodes",
 };

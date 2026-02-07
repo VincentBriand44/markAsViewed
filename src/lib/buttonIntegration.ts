@@ -2,11 +2,8 @@ import iconCheck from "../assets/markAsView-icon_check.svg";
 import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconInfo from "../assets/markAsView-icon_info.svg";
 
-import type { IntegrationData, Website } from "./types";
+import type { Data, Website } from "./types";
 
-/**
- * Interface pour définir un bouton d'action
- */
 interface Button {
 	id: string;
 	icon: string;
@@ -14,17 +11,11 @@ interface Button {
 	info?: boolean;
 }
 
-// Variables de cache pour optimiser les performances
-let lastIntegrationCall: IntegrationData | null = null;
+let lastIntegrationCall: Data | null = null;
 
-/**
- * Vérifie si les boutons doivent être injectés
- * Utilise un cache pour éviter les appels répétés
- */
-const buttonCheck = ({ integration }: Website): boolean => {
-	const currentData = integration();
+const buttonCheck = ({ data }: Website): boolean => {
+	const currentData = data();
 
-	// Cache les données pour éviter les appels répétés
 	if (
 		lastIntegrationCall &&
 		lastIntegrationCall.episode === currentData.episode &&
@@ -38,28 +29,16 @@ const buttonCheck = ({ integration }: Website): boolean => {
 	return false;
 };
 
-/**
- * Injecte les boutons "Mark as Viewed" dans le DOM
- * @param position - Sélecteur CSS de l'élément parent
- * @param integration - Fonction d'intégration pour récupérer les données
- */
-const buttonInject = ({ position, integration }: Website) => {
+const buttonInject = ({ episodePosition, data }: Website) => {
 	try {
-		// Utilise les données mises en cache si disponibles
-		const { episode, season, title } = lastIntegrationCall || integration();
-		const element = document.querySelector(position);
+		const { episode, season, title } = lastIntegrationCall || data();
+		const element = document.querySelector(episodePosition);
 
 		if (!element) {
-			console.warn(`Élément non trouvé pour l'injection: ${position}`);
+			console.warn(`Élément non trouvé pour l'injection: ${episodePosition}`);
 			return;
 		}
 
-		/**
-		 * Génère l'URL AdKami pour un épisode donné
-		 * @param ep - Numéro d'épisode
-		 * @param info - Si true, ajoute le paramètre kaddon-info
-		 * @returns URL complète vers AdKami
-		 */
 		const getEpisodeUrl = (ep: number | null, info = false) => {
 			let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
 			if (season !== null && ep !== null) {
