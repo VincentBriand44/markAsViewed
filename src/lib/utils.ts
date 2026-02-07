@@ -29,7 +29,7 @@ export const mergeObjects = (objects: ItemParse[]): ItemParse => {
 	return acc;
 };
 
-export const parseJsonLdData = (): ItemParse[] => {
+export const parseJsonLdData = (animeState: boolean = false): ItemParse[] => {
 	const scripts: NodeListOf<HTMLScriptElement> = document.querySelectorAll(JSON_LD_SELECTOR);
 
 	return Array.from(scripts)
@@ -44,7 +44,11 @@ export const parseJsonLdData = (): ItemParse[] => {
 		.filter((item): item is ItemParse => item !== null);
 };
 
-export const extractIntegrationData = (parsed: ItemParse[]): Data => {
+export const extractIntegrationData = (parsed: ItemParse[], bypass?: string | undefined): Data => {
+  if (bypass) return { title: bypass, episode: 0, season: 0 }
+
+  console.log(bypass)
+
 	const merged: ItemParse = mergeObjects(parsed);
 
 	const title = merged.partOfSeries?.name;

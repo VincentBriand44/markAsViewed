@@ -1,4 +1,4 @@
-import { buttonCheck, buttonInject } from "./lib/buttonIntegration";
+import { animeInject, buttonCheck, episodeInject } from "./lib/buttonIntegration";
 import goTo from "./lib/goTo";
 import episodeIntegration from "./lib/integrations";
 import { MUTATION_DEBOUNCE_DELAY, WINDOW_CLOSE_DELAY } from "./lib/utils";
@@ -16,12 +16,22 @@ const mutationCallback: MutationCallback = () => {
 
 	mutationTimeout = setTimeout(() => {
 		const container = document.querySelector("#kaddon-container");
-		const mutationElement = document.querySelector(website.episodeMutation);
+    let seasonState = false
 
-		if (!mutationElement || !website.episodeMutation || (buttonCheck(website) && container)) return;
+    if (!website.episodeMutation) return
+
+		let mutationElement = document.querySelector(website.episodeMutation);
+
+    if (!mutationElement && website.animeMutation) {
+      mutationElement = document.querySelector(website.animeMutation);
+      seasonState = true
+    }
+
+		if (!mutationElement || (buttonCheck({data: website.data, seasonState}) && container)) return;
 
 		container?.remove();
-		buttonInject(website);
+
+    seasonState ? animeInject(website) : episodeInject(website);
 	}, MUTATION_DEBOUNCE_DELAY);
 };
 
