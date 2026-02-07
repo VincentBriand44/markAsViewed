@@ -1,4 +1,4 @@
-import { build, context, type BuildOptions, type SameShape } from "esbuild";
+import { type BuildOptions, build, context, type SameShape } from "esbuild";
 import { version } from "./package.json";
 
 const banner = `
@@ -25,7 +25,7 @@ const banner = `
 const buildOptions: SameShape<BuildOptions, BuildOptions> = {
 	entryPoints: ["src/index.ts"],
 	bundle: true,
-  minify: process.env.NODE_ENV !== "development",
+	minify: process.env.NODE_ENV !== "development",
 	target: "esNext",
 	outfile: "dist/markAsViewed.user.js",
 	banner: {

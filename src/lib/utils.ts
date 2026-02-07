@@ -1,9 +1,6 @@
-import type { IntegrationData, ItemParse } from "./types";
+import type { Data, ItemParse } from "./types";
 
-// Constantes pour les sélecteurs JSON-LD
 export const JSON_LD_SELECTOR = 'script[type="application/ld+json"]';
-
-// Constantes pour les délais
 export const MUTATION_DEBOUNCE_DELAY = 100;
 export const WINDOW_CLOSE_DELAY = 1000;
 
@@ -32,9 +29,6 @@ export const mergeObjects = (objects: ItemParse[]): ItemParse => {
 	return acc;
 };
 
-/**
- * Parse les données JSON-LD depuis les scripts de la page
- */
 export const parseJsonLdData = (): ItemParse[] => {
 	const scripts: NodeListOf<HTMLScriptElement> = document.querySelectorAll(JSON_LD_SELECTOR);
 
@@ -50,10 +44,11 @@ export const parseJsonLdData = (): ItemParse[] => {
 		.filter((item): item is ItemParse => item !== null);
 };
 
-/**
- * Extrait les données d'intégration depuis les objets JSON-LD parsés
- */
-export const extractIntegrationData = (parsed: ItemParse[]): IntegrationData => {
+export const extractIntegrationData = (parsed: ItemParse[], bypass?: string | undefined): Data => {
+	if (bypass) return { title: bypass, episode: 0, season: 0 };
+
+	console.log(bypass);
+
 	const merged: ItemParse = mergeObjects(parsed);
 
 	const title = merged.partOfSeries?.name;

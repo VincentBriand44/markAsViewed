@@ -1,4 +1,4 @@
-const goToEpisode = (): void => {
+const goTo = (): void => {
 	const list = document.querySelectorAll<HTMLDivElement>(".video-item-list");
 	let args = location.search.split("kaddon=")[1];
 	let info = false;
@@ -46,4 +46,4 @@ const goToEpisode = (): void => {
 	window.location.href = anchor.href;
 };
 
-export default goToEpisode;
+export default goTo;

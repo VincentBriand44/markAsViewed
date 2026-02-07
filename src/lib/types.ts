@@ -45,16 +45,20 @@ export interface ItemParse {
 	uploadDate?: string;
 }
 
-export interface IntegrationData {
+export interface Data {
 	episode: number;
 	season: number;
 	title: string;
 }
 
 export interface Website {
-	integration: () => IntegrationData;
-	position: string;
-	mutation: string;
+	data: () => Data;
+
+	episodePosition: string;
+	episodeMutation: string;
+
+	animePosition?: string;
+	animeMutation?: string;
 }
 
 export type Pos = Element | null;

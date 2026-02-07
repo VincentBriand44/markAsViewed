@@ -1,6 +1,6 @@
-import type { IntegrationData } from "../types";
+import type { Data } from "../../types";
 
-const integration = (): IntegrationData => {
+const data = (): Data => {
 	const episodeElement: HTMLSelectElement | null = document.querySelector("#selectEpisodes");
 	const seasonElement = document.querySelector("#avOeuvre");
 
@@ -8,7 +8,9 @@ const integration = (): IntegrationData => {
 	const episode = Number(episodeElement?.value?.split(" ")[1]);
 	const season = Number.parseInt(seasonElement?.textContent?.split(" ")[1] ?? "", 10);
 
-	if (!title || !season) throw new Error("data not found");
+	console.log(title, season);
+
+	if (!title) throw new Error("data not found");
 
 	return {
 		episode,
@@ -18,7 +20,10 @@ const integration = (): IntegrationData => {
 };
 
 export default {
-	integration,
-	position: "#printLastEpisode",
-	mutation: "#selectEpisodes",
+	data,
+	episodePosition: "#printLastEpisode",
+	episodeMutation: "#selectEpisodes",
+
+	animePosition: "#addVu",
+	animeMutation: "#addVu",
 };

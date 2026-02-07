@@ -1,6 +1,6 @@
-import type { IntegrationData } from "../types";
+import type { Data } from "../../types";
 
-const integration = (): IntegrationData => {
+const data = (): Data => {
 	const titleElement: HTMLSelectElement | null = document.querySelector(
 		'div[data-uia="video-title"]',
 	);
@@ -25,7 +25,7 @@ const integration = (): IntegrationData => {
 };
 
 export default {
-	integration,
-	position: 'div[data-uia="video-title"]',
-	mutation: 'div[data-uia="video-title"]',
+	data,
+	episodePosition: 'div[data-uia="video-title"]',
+	episodeMutation: 'div[data-uia="video-title"]',
 };
