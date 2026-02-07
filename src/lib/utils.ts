@@ -29,7 +29,7 @@ export const mergeObjects = (objects: ItemParse[]): ItemParse => {
 	return acc;
 };
 
-export const parseJsonLdData = (animeState: boolean = false): ItemParse[] => {
+export const parseJsonLdData = (): ItemParse[] => {
 	const scripts: NodeListOf<HTMLScriptElement> = document.querySelectorAll(JSON_LD_SELECTOR);
 
 	return Array.from(scripts)
