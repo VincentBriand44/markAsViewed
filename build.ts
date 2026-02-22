@@ -1,4 +1,4 @@
-import { type BuildOptions, build, context, type SameShape } from "esbuild";
+import { build, context, type BuildOptions, type SameShape } from "esbuild";
 import { version } from "./package.json";
 
 const banner = `
@@ -14,6 +14,7 @@ const banner = `
 // @match        http*://*.crunchyroll.com/*
 // @match        http*://*.animationdigitalnetwork.com/video/*
 // @match        http*://*.netflix.com/watch/*
+// @match        http*://*.netflix.com/title/*
 // @match        http*://*.adkami.com/anime*?kaddon*
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
 // @include      http*://anime-sama.*/catalogue/*
