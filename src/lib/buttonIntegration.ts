@@ -1,5 +1,5 @@
-import iconCheck from "../assets/markAsView-icon_check.svg";
 import iconBack from "../assets/markAsView-icon_check-1.svg";
+import iconCheck from "../assets/markAsView-icon_check.svg";
 import iconInfo from "../assets/markAsView-icon_info.svg";
 
 import type { Data, Website } from "./types";
@@ -35,7 +35,7 @@ const buttonCheck = ({ data, seasonState }: ButtonCheckArgs): boolean => {
 	return false;
 };
 
-const episodeInject = ({ episodePosition, data }: Website) => {
+const episodeInject = async ({ episodePosition, data }: Website) => {
 	try {
 		if (!lastIntegrationCall) lastIntegrationCall = data();
 
@@ -47,15 +47,26 @@ const episodeInject = ({ episodePosition, data }: Website) => {
 			return;
 		}
 
-		const getEpisodeUrl = (step: number | null, info = false) => {
-			let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
+		const getEpisodeUrl = async (step: number | null, info = false) => {
+      let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
+
+      const titleSaved = await GM.getValue(title)
+
+			if (titleSaved) {
+        url = `${titleSaved.toString()}/`
+			}
+
 			if (season !== null && step !== null) {
 				const ep = episode + step;
 
-				url += `&kaddon=${ep > 0 ? ep : 1}/1/2/${season}`;
+        if (!titleSaved) url += '&kaddon='
+
+				url += `${ep > 0 ? ep : 1}/1/2/${season}`;
+
+        if (titleSaved && !info) url += '?kaddon'
 			}
 
-			if (info) {
+			if (info && !titleSaved) {
 				url += "&kaddon-info";
 			}
 
@@ -81,13 +92,13 @@ const episodeInject = ({ episodePosition, data }: Website) => {
 			},
 		];
 
-		buttonInject({ buttons, getEpisodeUrl, element });
+		await buttonInject({ buttons, getEpisodeUrl, element });
 	} catch (error) {
 		console.error("Erreur lors de l'injection du bouton:", error);
 	}
 };
 
-const animeInject = ({ animePosition, data }: Website) => {
+const animeInject = async ({ animePosition, data }: Website) => {
 	try {
 		if (animePosition === undefined) return;
 
@@ -111,7 +122,7 @@ const animeInject = ({ animePosition, data }: Website) => {
 			},
 		];
 
-		buttonInject({ buttons, getEpisodeUrl, element });
+		await buttonInject({ buttons, getEpisodeUrl, element });
 	} catch (error) {
 		console.error("Erreur lors de l'injection du bouton:", error);
 	}
@@ -119,11 +130,11 @@ const animeInject = ({ animePosition, data }: Website) => {
 
 interface ButtonInjectArgs {
 	buttons: Button[];
-	getEpisodeUrl: (step: number | null, info: boolean) => string | string;
+	getEpisodeUrl: (step: number | null, info: boolean) => string | Promise<string>;
 	element: Element;
 }
 
-const buttonInject = ({ buttons, getEpisodeUrl, element }: ButtonInjectArgs) => {
+const buttonInject = async ({ buttons, getEpisodeUrl, element }: ButtonInjectArgs) => {
 	const container = document.createElement("div");
 	container.id = "kaddon-container";
 	container.style.display = "flex";
@@ -133,7 +144,7 @@ const buttonInject = ({ buttons, getEpisodeUrl, element }: ButtonInjectArgs) => 
 	for (const button of buttons) {
 		const buttonElement = document.createElement("a");
 		buttonElement.id = button.id;
-		buttonElement.href = getEpisodeUrl(button.step, button.info ?? false);
+		buttonElement.href = await Promise.resolve(getEpisodeUrl(button.step, button.info ?? false));
 		buttonElement.target = "_blank";
 
 		buttonElement.style.cursor = "pointer";

@@ -21,19 +21,13 @@ const mutationCallback: MutationCallback = () => {
 		if (!website.episodeMutation) return;
 
 		let mutationElement = document.querySelector(website.episodeMutation);
-		console.log(mutationElement);
 
 		if (!mutationElement && website.animeMutation) {
 			mutationElement = document.querySelector(website.animeMutation);
 			seasonState = true;
 		}
 
-		console.log(mutationElement);
-		console.log(!mutationElement, buttonCheck({ data: website.data, seasonState }), container); // TODO: remove log
-
 		if (!mutationElement || (buttonCheck({ data: website.data, seasonState }) && container)) return;
-
-		console.log("mutation"); // TODO: remove log
 
 		container?.remove();
 
@@ -51,7 +45,16 @@ const config = { childList: true, subtree: true, attributes: true };
 			return;
 		}
 
-		if (location.search.includes("kaddon-info")) return;
+    const locationSearch = location.search
+
+    if (locationSearch.includes("kaddon-title")) {
+      const title = locationSearch.split("kaddon-title=")[1]
+      const url = location.pathname.split('/')[2]
+
+      GM.setValue(decodeURIComponent(title), url)
+    }
+
+		if (locationSearch.includes("kaddon-info")) return;
 
 		const watchlist = document.querySelector<HTMLButtonElement>(
 			"#watchlist-actuel, #watchlist_end",

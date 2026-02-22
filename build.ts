@@ -19,7 +19,9 @@ const banner = `
 // @match        http*://*.adkami.com/video?search=*&kaddon=*
 // @include      http*://anime-sama.*/catalogue/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=crunchyroll.com
-// @grant        none
+// @grant        GM.setValue
+// @grant        GM.getValue
+// @grant        GM.listValues
 // ==/UserScript==
 `;
 
