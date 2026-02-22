@@ -5,12 +5,12 @@ const data = (): Data => {
 	const parsed = parseJsonLdData();
 	let bypass: undefined | string;
 
-  if (location.pathname.split('/video/')[1].split('/')[1] === undefined) {
+	if (location.pathname.split("/video/")[1].split("/")[1] === undefined) {
 		bypass = document
 			.querySelector('head>meta[property="og:title"]')
 			?.attributes[1].value.split(" - Anime en streaming")[0];
 
-    if (!bypass) throw new Error("not found title");
+		if (!bypass) throw new Error("not found title");
 	}
 
 	return extractIntegrationData(parsed, bypass);

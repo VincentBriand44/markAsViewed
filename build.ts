@@ -1,4 +1,4 @@
-import { build, context, type BuildOptions, type SameShape } from "esbuild";
+import { type BuildOptions, build, context, type SameShape } from "esbuild";
 import { version } from "./package.json";
 
 const banner = `

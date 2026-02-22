@@ -17,23 +17,23 @@ const mutationCallback: MutationCallback = () => {
 	mutationTimeout = setTimeout(() => {
 		const container = document.querySelector("#kaddon-container");
 		let seasonState = false;
-    
+
 		if (!website.episodeMutation) return;
 
 		let mutationElement = document.querySelector(website.episodeMutation);
-    console.log(mutationElement)
+		console.log(mutationElement);
 
 		if (!mutationElement && website.animeMutation) {
 			mutationElement = document.querySelector(website.animeMutation);
 			seasonState = true;
 		}
 
-    console.log(mutationElement)
-    console.log(!mutationElement, buttonCheck({ data: website.data, seasonState }), container ) // TODO: remove log
+		console.log(mutationElement);
+		console.log(!mutationElement, buttonCheck({ data: website.data, seasonState }), container); // TODO: remove log
 
 		if (!mutationElement || (buttonCheck({ data: website.data, seasonState }) && container)) return;
 
-    console.log('mutation') // TODO: remove log
+		console.log("mutation"); // TODO: remove log
 
 		container?.remove();
 
