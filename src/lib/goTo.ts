@@ -1,7 +1,7 @@
 const goTo = (): void => {
 	const list = document.querySelectorAll<HTMLDivElement>(".video-item-list");
 	let args = location.search.split("kaddon=")[1];
-  const title = location.search.split("search=")[1].split("&")[0]
+	const title = location.search.split("search=")[1].split("&")[0];
 	let info = false;
 	let lock = false;
 
@@ -34,10 +34,10 @@ const goTo = (): void => {
 		const anchor = item.querySelector<HTMLAnchorElement>(".top a");
 
 		if (anchor?.href) {
-      if (list.length === 1) {
-        console.log(decodeURIComponent(title), anchor.href)
-        GM.setValue(decodeURIComponent(title), anchor.href)
-      }
+			if (list.length === 1) {
+				console.log(decodeURIComponent(title), anchor.href);
+				GM.setValue(decodeURIComponent(title), anchor.href);
+			}
 
 			anchor.href = `${anchor.href}/${args}/?${info ? "kaddon-info" : "kaddon"}`;
 		}

@@ -45,14 +45,14 @@ const config = { childList: true, subtree: true, attributes: true };
 			return;
 		}
 
-    const locationSearch = location.search
+		const locationSearch = location.search;
 
-    if (locationSearch.includes("kaddon-title")) {
-      const title = locationSearch.split("kaddon-title=")[1]
-      const url = location.pathname.split('/')[2]
+		if (locationSearch.includes("kaddon-title")) {
+			const title = locationSearch.split("kaddon-title=")[1];
+			const url = location.pathname.split("/")[2];
 
-      GM.setValue(decodeURIComponent(title), url)
-    }
+			GM.setValue(decodeURIComponent(title), url);
+		}
 
 		if (locationSearch.includes("kaddon-info")) return;
 

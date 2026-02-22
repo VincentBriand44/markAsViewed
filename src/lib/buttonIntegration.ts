@@ -1,5 +1,5 @@
-import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconCheck from "../assets/markAsView-icon_check.svg";
+import iconBack from "../assets/markAsView-icon_check-1.svg";
 import iconInfo from "../assets/markAsView-icon_info.svg";
 
 import type { Data, Website } from "./types";
@@ -48,22 +48,22 @@ const episodeInject = async ({ episodePosition, data }: Website) => {
 		}
 
 		const getEpisodeUrl = async (step: number | null, info = false) => {
-      let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
+			let url = `https://www.adkami.com/video?search=${encodeURIComponent(title)}`;
 
-      const titleSaved = await GM.getValue(title)
+			const titleSaved = await GM.getValue(title);
 
 			if (titleSaved) {
-        url = `${titleSaved.toString()}/`
+				url = `${titleSaved.toString()}/`;
 			}
 
 			if (season !== null && step !== null) {
 				const ep = episode + step;
 
-        if (!titleSaved) url += '&kaddon='
+				if (!titleSaved) url += "&kaddon=";
 
 				url += `${ep > 0 ? ep : 1}/1/2/${season}`;
 
-        if (titleSaved && !info) url += '?kaddon'
+				if (titleSaved && !info) url += "?kaddon";
 			}
 
 			if (info && !titleSaved) {
