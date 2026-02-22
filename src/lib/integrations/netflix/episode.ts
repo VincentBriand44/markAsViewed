@@ -1,6 +1,14 @@
 import type { Data } from "../../types";
 
 const data = (): Data => {
+	if (location.pathname.includes("/title/")) {
+		const bypass = document.querySelector(".about-header > h3 > strong")?.textContent;
+
+		if (!bypass) throw new Error("data not found");
+
+		return { title: bypass, episode: 0, season: 0 };
+	}
+
 	const titleElement: HTMLSelectElement | null = document.querySelector(
 		'div[data-uia="video-title"]',
 	);
@@ -28,4 +36,7 @@ export default {
 	data,
 	episodePosition: 'div[data-uia="video-title"]',
 	episodeMutation: 'div[data-uia="video-title"]',
+
+	animePosition: 'div[data-uia="mini-modal-controls"] > div:last-child',
+	animeMutation: 'div[data-uia="mini-modal-controls"]',
 };
