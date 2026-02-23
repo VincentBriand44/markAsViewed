@@ -3,7 +3,7 @@ const goTo = (): void => {
 	let args = location.search.split("kaddon=")[1];
 	const title = location.search.split("search=")[1].split("&")[0];
 	let info = false;
-	let lock = false;
+	let lock = false; // TODO: false
 
 	if (args.includes("&kaddon-info")) {
 		info = true;
@@ -49,7 +49,7 @@ const goTo = (): void => {
 
 	if (!anchor?.href || lock) return;
 
-	window.location.href = `${anchor.href}&kaddon-title=${title}`;
+	window.location.href = anchor.href;
 };
 
 export default goTo;
