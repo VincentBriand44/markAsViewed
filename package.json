@@ -1,51 +1,51 @@
 {
-  "name": "mark-as-viewed",
-  "version": "1.7.0",
-  "module": "index.ts",
-  "type": "module",
-  "private": false,
-  "author": {
-    "email": "pro.vincent.briand@pm.me",
-    "name": "VincentBriand44"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/VincentBriand44/markAsViewed"
-  },
-  "license": "UNLICENSED",
-  "description": "Mark as viewed on AdKami from other platform",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.4",
-    "@types/bun": "^1.3.9",
-    "@types/tampermonkey": "5.0.5",
-    "cross-env": "10.1.0",
-    "esbuild": "0.27.3"
-  },
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development bun --watch build.ts",
-    "build": "bun build.ts",
-    "lint": "bunx @biomejs/biome lint --write .",
-    "format": "bunx @biomejs/biome format --write .",
-    "check": "bunx tsc --noEmit && bunx @biomejs/biome check --write ."
-  },
-  "peerDependencies": {
-    "typescript": "^5.9.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-emoji"
-    },
-    "cz-emoji": {
-      "skipQuestions": [
-        "scope",
-        "body",
-        "issues",
-        "breaking"
-      ]
-    }
-  },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "esbuild"
-  ]
+	"name": "mark-as-viewed",
+	"version": "1.7.0",
+	"module": "index.ts",
+	"type": "module",
+	"private": false,
+	"author": {
+		"email": "pro.vincent.briand@pm.me",
+		"name": "VincentBriand44"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/VincentBriand44/markAsViewed"
+	},
+	"license": "UNLICENSED",
+	"description": "Mark as viewed on AdKami from other platform",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.4",
+		"@types/bun": "^1.3.9",
+		"@types/tampermonkey": "5.0.5",
+		"cross-env": "10.1.0",
+		"esbuild": "0.27.3"
+	},
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development bun --watch build.ts",
+		"build": "bun build.ts",
+		"lint": "bunx @biomejs/biome lint --write .",
+		"format": "bunx @biomejs/biome format --write .",
+		"check": "bunx tsc --noEmit && bunx @biomejs/biome check --write ."
+	},
+	"peerDependencies": {
+		"typescript": "^5.9.3"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-emoji"
+		},
+		"cz-emoji": {
+			"skipQuestions": [
+				"scope",
+				"body",
+				"issues",
+				"breaking"
+			]
+		}
+	},
+	"trustedDependencies": [
+		"@biomejs/biome",
+		"esbuild"
+	]
 }
